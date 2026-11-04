@@ -1,41 +1,58 @@
 package org.example;
 
 import org.example.model.Book;
-import org.example.model.Student;
-import org.example.model.IssueRecord;
+import org.example.service.BookService;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        Book book = new Book(
-                101,
-                "Java Programming",
-                "James Gosling",
-                "Programming",
-                5
-        );
+        BookService bookService = new BookService();
 
-        Student student = new Student(
-                1,
-                "Rohit",
-                "rohit@gmail.com",
-                "9876543210"
-        );
+        // Creating Book Objects
+        Book book1 = new Book(101, "Java Programming", "James Gosling", "Programming", 5);
+        Book book2 = new Book(102, "Python Basics", "Guido van Rossum", "Programming", 3);
+        Book book3 = new Book(103, "Data Structures", "Mark Allen Weiss", "Computer Science", 4);
 
-        IssueRecord record = new IssueRecord(
-                1,
-                book.getBookId(),
-                student.getStudentId()
-        );
+        // 1. Add Books
+        System.out.println("\n========== ADD BOOKS ==========");
 
-        System.out.println("Book: " + book.getTitle());
-        System.out.println("Student: " + student.getName());
+        bookService.addBook(book1);
+        bookService.addBook(book2);
+        bookService.addBook(book3);
 
-        System.out.println("Issue Status: " + record.getStatus());
+        // 2. Test Duplicate Book ID
+        System.out.println("\n========== DUPLICATE TEST ==========");
 
-        record.returnBook();
+        Book duplicateBook = new Book(101, "Advanced Java", "John Smith", "Programming", 2);
+        bookService.addBook(duplicateBook);
 
-        System.out.println("Updated Status: " + record.getStatus());
-        System.out.println("Return Date: " + record.getReturnDate());
+        // 3. View All Books
+        System.out.println("\n========== ALL BOOKS ==========");
+
+        bookService.viewAllBooks();
+
+        // 4. Search Existing Book
+        System.out.println("\n========== SEARCH EXISTING BOOK ==========");
+
+        Book searchedBook = bookService.searchBookById(102);
+
+        if (searchedBook != null) {
+            System.out.println("Book Found!");
+            System.out.println(searchedBook);
+        } else {
+            System.out.println("Book not found!");
+        }
+
+        // 5. Search Non-Existing Book
+        System.out.println("\n========== SEARCH INVALID BOOK ==========");
+
+        Book invalidBook = bookService.searchBookById(999);
+
+        if (invalidBook != null) {
+            System.out.println(invalidBook);
+        } else {
+            System.out.println("Book not found!");
+        }
     }
 }

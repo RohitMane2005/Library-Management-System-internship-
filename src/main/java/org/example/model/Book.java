@@ -20,6 +20,16 @@ public class Book {
         this.availableQuantity = totalQuantity;
     }
 
+    @Override
+    public String toString() {
+        return "Book ID: " + bookId +
+                "\nTitle: " + title +
+                "\nAuthor: " + author +
+                "\nCategory: " + category +
+                "\nTotal Quantity: " + totalQuantity +
+                "\nAvailable Quantity: " + availableQuantity;
+    }
+
 
     public int getBookId() {
         return bookId;
