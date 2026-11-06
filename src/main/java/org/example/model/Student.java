@@ -4,14 +4,22 @@ public class Student {
 
     public int studentId;
     private String name;
-    private String mail;
+    private String Email;
     private String phone;
 
-    public Student(int studentId,String name,String mail,String phone){
+    public Student(int studentId,String name,String Email,String phone){
         this.studentId = studentId;
         this.name = name;
-        this.mail = mail;
+        this.Email = Email;
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [ID=" + studentId +
+                ", Name=" + name +
+                ", Email=" + Email +
+                ", Phone=" + phone + "]";
     }
 
     public int getStudentId() {
@@ -26,12 +34,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.Email = email;
     }
 
     public String getPhone() {
