@@ -71,4 +71,9 @@ public class IssueRecord {
         this.returnDate = LocalDate.now();
         this.status = "RETURNED";
     }
+
+    @Override
+    public String toString() {
+        return "Issue ID: " + issueId + "\nBook ID: " + bookId + "\nStudent ID: " + studentId + "\nIssue Date: " + issueDate + "\nReturn Date: " + (returnDate != null ? returnDate : "Not Returned") + "\nStatus: " + status;
+    }
 }
