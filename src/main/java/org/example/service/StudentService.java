@@ -8,6 +8,11 @@ import java.util.List;
 public class StudentService {
 
     private List<Student> students = new ArrayList<>();
+    private IssueService issueService;
+
+    public void setIssueService(IssueService issueService) {
+        this.issueService = issueService;
+    }
 
     public Student searchStudentById(int studentId) {
         for (Student student : students) {
@@ -95,7 +100,7 @@ public class StudentService {
             return;
         }
 
-        String cleanPhone = student.getPhone().replaceAll("\\D", "");
+        String cleanPhone = phone.replaceAll("\\D", "");
         if (cleanPhone.length() < 10) {
             System.out.println("Error: Phone number cannot be less than ten digits.");
             return;
@@ -106,7 +111,7 @@ public class StudentService {
 
         student.setName(name);
         student.setEmail(email);
-        student.setPhone(phone);
+        student.setPhone(cleanPhone);
 
         System.out.println("Success: Student details updated successfully for ID: " + studentId);
     }
@@ -122,11 +127,10 @@ public class StudentService {
         }
 
         // 3. Important Business Rule Check:
-        // Once Issue and Return functionality is implemented, uncomment and verify:
-        // if (issueService.hasActiveIssues(studentId)) {
-        //     System.out.println("Error: Cannot delete student. Student has active book issues.");
-        //     return;
-        // }
+        if (this.issueService != null && this.issueService.hasActiveIssues(studentId)) {
+            System.out.println("Error: Cannot delete student. Student has active book issues.");
+            return;
+        }
 
         // 4. Remove the student from ArrayList
         students.remove(student);
